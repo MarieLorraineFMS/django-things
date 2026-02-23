@@ -19,3 +19,4 @@ __pycache__/
 # --- Fichiers système ---
 .DS_Store
 thumbs.db
+djangothings/__pycache__/urls.cpython-313.pyc
