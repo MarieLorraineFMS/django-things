@@ -3,10 +3,10 @@ venv/
 .venv/
 env/
 
-# --- Base de données) ---
+# --- Base de données ---
 *.sqlite3
 
-# --- Miettes de Python ---
+# --- Python things ---
 __pycache__/
 *.pyc
 *.pyo
@@ -19,4 +19,6 @@ __pycache__/
 # --- Fichiers système ---
 .DS_Store
 thumbs.db
+djangothings/__pycache__/urls.cpython-313.pyc
+polls/__pycache__/models.cpython-313.pyc
 djangothings/__pycache__/urls.cpython-313.pyc
