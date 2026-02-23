@@ -1,0 +1,21 @@
+# --- Environnement Virtuel ---
+venv/
+.venv/
+env/
+
+# --- Base de données) ---
+*.sqlite3
+
+# --- Miettes de Python ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# --- VSCode ---
+.vscode/
+.idea/
+
+# --- Fichiers système ---
+.DS_Store
+thumbs.db
