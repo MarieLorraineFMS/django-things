@@ -9,10 +9,14 @@ from django.utils import timezone
 
 class Question(models.Model):
     """
-    Une question de sondage.
+    Une question du sondage.
     """
-    question_text = models.CharField(max_length=200)
+    question_text = models.CharField(max_length=200, verbose_name="Question")
     pub_date = models.DateTimeField('date de publication')
+
+    class Meta:
+        verbose_name = "Question"
+        verbose_name_plural = "Questions"
 
     def __str__(self) -> str:
         return str(self.question_text)
@@ -31,8 +35,12 @@ class Choice(models.Model):
     Un choix de réponse lié à une question.
     """
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choice_text = models.CharField(max_length=200)
+    choice_text = models.CharField(max_length=200,verbose_name="Choix")
     votes = models.IntegerField(default=0)
+
+    class Meta:
+        verbose_name = "Choix"
+        verbose_name_plural = "Choix"
 
     def __str__(self) -> str:
         return str(self.choice_text)

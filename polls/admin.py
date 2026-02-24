@@ -21,5 +21,6 @@ class ChoiceAdmin(admin.ModelAdmin):
     list_display = ('choice_text', 'question', 'votes')
     list_filter = ['question']
 
+# 4.1 : enregistrement des modèles
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Choice, ChoiceAdmin)
