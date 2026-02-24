@@ -320,24 +320,25 @@ for item in sorted_q:
 **Résultat obtenu :**
 
 > ...
+
 > Votes: None | Question: Langage préféré ? | Choix: None
 
-> Votes: 0 | Question: Quel texte pour cette question ? | Choix: pour
+> Votes: 4 | Question: Quel texte pour cette question ? | Choix: pour
 
-> Votes: 0 | Question: Quel texte pour cette question ? | Choix: Un
+> Votes: 9 | Question: Quel texte pour cette question ? | Choix: Un
 
-> Votes: 0 | Question: Quel texte pour cette question ? | Choix: texte
+> Votes: 13 | Question: Quel texte pour cette question ? | Choix: texte
 
-> Votes: 0 | Question: Une question en plus ? | Choix: Oui
+> Votes: 25 | Question: Une question en plus ? | Choix: Oui
 
-> Votes: 0 | Question: Une question en plus ? | Choix: Non
+> Votes: 38 | Question: Une question en plus ? | Choix: Non
 
-> Votes: 0 | Question: Une question encore ? | Choix: Oui toujours plus
+> Votes: 40 | Question: Une question encore ? | Choix: Oui toujours plus
 
-> Votes: 0 | Question: Une question encore ? | Choix: Non ça suffit
+> Votes: 73 | Question: Une question encore ? | Choix: Non ça suffit
 
-> Votes: 0 | Question: Une très vieille question ? | Choix: 2024
+> Votes: 76 | Question: Une très vieille question ? | Choix: 2024
 
-> Votes: 0 | Question: Une très vieille question ? | Choix: 2023
+> Votes: 92 | Question: Une très vieille question ? | Choix: 2023
 
 > \>>
