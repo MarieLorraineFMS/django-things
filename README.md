@@ -1,5 +1,4 @@
-# Compte-rendu : Administration Django (Étape 2.2.1.3)
-
+# Compte-rendu : Administration Django
 **Auteur :** Marie-Lorraine
 **Date :** 2026-02-24
 
