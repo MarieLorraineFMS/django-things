@@ -22,3 +22,4 @@ thumbs.db
 djangothings/__pycache__/urls.cpython-313.pyc
 polls/__pycache__/models.cpython-313.pyc
 djangothings/__pycache__/urls.cpython-313.pyc
+djangothings/__pycache__/settings.cpython-313.pyc
