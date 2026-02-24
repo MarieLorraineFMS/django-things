@@ -1,10 +1,9 @@
-"""_summary_
+from django.http import HttpRequest, HttpResponse
 
-    Returns:
-        _type_: _description_
-"""
-from django.http import HttpResponse
-
-
-def index(request): # type: ignore
-    return HttpResponse("Hello, world. You're at the polls index.")
+# En ajoutant 'HttpRequest' on dit à Pylance :
+# "Le paramètre request est un objet de type requête HTTP de Django"
+def index(request: HttpRequest) -> HttpResponse:
+    """
+    Vue pour l'index de l'application.
+    """
+    return HttpResponse("Bonjour l'ami")
