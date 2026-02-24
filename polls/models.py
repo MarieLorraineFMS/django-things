@@ -1,40 +1,38 @@
 """
-Module de gestion des modèles pour l'application Polls.
-Ce fichier définit comment sont rangées nos Questions et nos Choix
-dans la base de données, un peu comme un inventaire de magasin.
+Définition des modèles de données.
+2.2.1.3.
 """
 import datetime
 
 from django.db import models
 from django.utils import timezone
 
-
 class Question(models.Model):
     """
-    Modèle représentant une question de sondage.
-    Chaque question à une date de publication et un texte.
+    Une question de sondage.
     """
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date de publication')
 
     def __str__(self) -> str:
-        """Affiche le texte de la question au lieu d'un numéro."""
         return str(self.question_text)
 
+    # 2.2.1.3 :
     def was_published_recently(self) -> bool:
-        """Vérifie si la question a été posée il y a moins de 24h."""
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
-
+        """
+        Retourne True si la question a été publiée dans les dernières 24h.
+        """
+        now = timezone.now()
+        # Entre "hier" et "maintenant"
+        return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
 class Choice(models.Model):
     """
-    Modèle représentant un choix de réponse.
-    Chaque Choix est lié à une Question, a un texte et un nombre de votes.
+    Un choix de réponse lié à une question.
     """
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
 
     def __str__(self) -> str:
-        """Affiche le texte du choix au lieu d'un numéro."""
         return str(self.choice_text)
