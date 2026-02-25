@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Liste des Sondages</title>
+  </head>
+  <body>
+    <h1>LES SONDAGES</h1>
+
+    {% if latest_question_list %}
+    <ul>
+      {% for question in latest_question_list %}
+      <li>
+        <a href="/polls/{{ question.id }}/">{{ question.question_text }}</a>
+
+        <span>(Publiée le : {{ question.pub_date|date:"d/m/Y H:i" }})</span>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>Aucun sondage. Revenez plus tard !</p>
+    {% endif %}
+  </body>
+</html>
