@@ -1,0 +1,23 @@
+{% extends "admin/base.html" %} {% block title %}ADMIN{% endblock %} {% block
+branding %}
+
+<h1 id="site-name">
+  <a href="{% url 'admin:index' %}"> Espace de gestion : Marie-Lorraine </a>
+</h1>
+
+<style>
+  /* Couleur header (la barre tout en haut) */
+  #header {
+    background: #2e7d32 !important;
+    color: white;
+  }
+  /* Couleur de la barre de navigation (le chemin de fer) */
+  div.breadcrumbs {
+    background: #1b5e20 !important;
+  }
+  /* Effet sur les liens au survol de la souris */
+  a:hover {
+    color: #a5d6a7 !important;
+  }
+</style>
+{% endblock %} {% block nav-global %} {% endblock %}

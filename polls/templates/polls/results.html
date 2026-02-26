@@ -1,4 +1,4 @@
-<!doctype html>
+{% load static %}<!doctype html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
@@ -11,6 +11,7 @@
       name="keywords"
       content="sondage, résultats, {{ question.question_text }}, vote"
     />
+    <link rel="stylesheet" href="{% static 'polls/style.css' %}" />
   </head>
   <body>
     <h1>RÉSULTATS</h1>
