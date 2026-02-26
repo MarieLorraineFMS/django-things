@@ -39,6 +39,9 @@ class Question(models.Model):
         short_text = self.question_text[:20]
         return f"{short_text}... (Publiée le : {self.pub_date.strftime('%d/%m/%Y')})"
 
+    def __repr__(self):
+        return "<Question: {}>".format(self.question_text)
+
     # 2.2.3> 1 :
     def age(self)-> datetime.timedelta:
         # Ecart entre "maintenant" et sa "création"
@@ -88,6 +91,7 @@ class Question(models.Model):
         proportion: float = (champ_votes / total_votes * 100) if total_votes > 0 else 0.0
 
         return (str(champion.choice_text), champ_votes, proportion)
+
 
 class Choice(models.Model):
     """
