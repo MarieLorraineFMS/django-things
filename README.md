@@ -1,4 +1,5 @@
 # Compte-rendu : Administration Django
+
 **Auteur :** Marie-Lorraine
 **Date :** 2026-02-24
 
@@ -340,3 +341,12 @@ for item in sorted_q:
 > Votes: 0 | Question: Une très vieille question ? | Choix: 2023
 
 > \>>
+
+## <span style="color:red">6. Saisie du formulaire</span>
+
+### <span style="color:yellow">Persistance de la saisie</span>
+
+**Objectif :** Eviter la perte des données saisies par l'utilisateur en cas d'erreur.
+
+- **Mécanisme** : Récupérer la valeur de `request.POST` et la réinjecter dans le `context` du template.
+- **Attribut HTML** : Utilisation de `value="{{ variable }}"` pour pré-remplir un champ `<input>`.
