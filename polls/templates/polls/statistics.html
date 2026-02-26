@@ -1,51 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Analyse détaillée des sondages">
-    <meta name="keywords" content="stats, django, polls">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Analyse détaillée des sondages" />
+    <meta name="keywords" content="stats, django, polls" />
     <title>Statistiques</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>STATISTIQUES</h1>
 
     <section>
-        <h2>Vue d'ensemble</h2>
-        <ul>
-            <li>
-                <strong>Total de questions :</strong>
-                {{ total_questions }} question{{ total_questions|pluralize }}
-            </li>
-            <li>
-                <strong>Total de réponses possibles :</strong>
-                {{ total_choices }} choix au total
-            </li>
-        </ul>
+      <h2>Vue d'ensemble</h2>
+      <ul>
+        <li>
+          <strong>Total de questions :</strong>
+          {{ total_questions }} question{{ total_questions|pluralize }}
+        </li>
+        <li>
+          <strong>Total de réponses possibles :</strong>
+          {{ total_choices }} choix au total
+        </li>
+      </ul>
     </section>
 
-    <hr>
+    <hr />
 
     <section>
-        <h2>Détail par question</h2>
-        {% for question in questions_list %}
-            <div>
-                <h3>{{ question.question_text }}</h3>
-                <ul>
-                    {% for choice in question.choice_set.all %}
-                        <li>
-                            {{ choice.choice_text }} :
-                            <strong>{{ choice.votes }}</strong>
-                            vote{{ choice.votes|pluralize }}
-                        </li>
-                    {% empty %}
-                        <li>Aucun choix pour cette question.</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endfor %}
+      <h2>Détail par question</h2>
+      {% for question in questions_list %}
+      <div>
+        <h3>{{ question.question_text }}</h3>
+        <ul>
+          {% for choice in question.choice_set.all %}
+          <li>
+            {{ choice.choice_text }} :
+            <strong>{{ choice.votes }}</strong>
+            vote{{ choice.votes|pluralize }}
+          </li>
+          {% empty %}
+          <li>Aucun choix pour cette question.</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
     </section>
 
-    <hr>
-    <a href="{% url 'polls:index' %}">Retour à l'accueil</a>
-</body>
+    <hr />
+    <a href="{% url 'polls:index' %}">Tableau de bord</a>
+  </body>
 </html>

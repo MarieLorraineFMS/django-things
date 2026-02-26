@@ -21,9 +21,10 @@
     <p>Aucun sondage. Revenez plus tard !</p>
     {% endif %}
     <p>
-    <a href="{% url 'polls:create_question' %}" style="text-decoration: none;">
+      <a href="{% url 'polls:create_question' %}" style="text-decoration: none">
         <button type="button">➕ Créer un nouveau sondage</button>
-    </a>
-</p>
+      </a>
+    </p>
+    <p><a href="{% url 'polls:all_polls' %}">Accueil</a></p>
   </body>
 </html>

@@ -142,3 +142,14 @@ def create_question(request: HttpRequest) -> HttpResponse:
         return HttpResponseRedirect(reverse("polls:index"))
 
     return render(request, "polls/create_question.html")
+
+def frequency(request: HttpRequest, question_id: int)-> HttpResponse:
+    question = get_object_or_404(Question, pk=question_id)
+    choices_stats = question.get_choices()
+    champion = question.get_max_choice()
+
+    return render(request, "polls/frequency.html", {
+        "question": question,
+        "choices_stats": choices_stats,
+        "champion": champion,
+    })

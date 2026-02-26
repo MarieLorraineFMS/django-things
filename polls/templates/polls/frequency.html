@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>FREQUENCES</title>
+  </head>
+  <body>
+    <h1>ANALYSE DE FRÉQUENCE</h1>
+
+    <section>
+      <h2>Question : {{ question.question_text }}</h2>
+
+      <ul>
+        {% for item in choices_stats %}
+        <li>
+          <strong>{{ item.0 }}</strong> : {{ item.1 }} vote{{ item.1|pluralize}}
+          (soit {{ item.2|floatformat:2 }}%)
+        </li>
+        {% empty %}
+        <li>Aucune donnée disponible.</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    {% if champion %}
+    <section
+      style="background: #e8f5e9; padding: 10px; border-left: 5px solid #4caf50"
+    >
+      <p>
+        <strong>Résultat dominant :</strong> {{ champion.0 }}
+        ({{champion.2|floatformat:2 }}%)
+      </p>
+    </section>
+    {% endif %}
+
+    <hr />
+    <nav>
+      <p>
+        <a href="{% url 'polls:detail' question.id %}">
+          Voter pour : "{{ question.question_text }}"
+        </a>
+      </p>
+
+      <p>
+        <small
+          ><a href="{% url 'polls:index' %}"
+            >Retour vers la liste des sondages</a
+          ></small
+        >
+      </p>
+    </nav>
+  </body>
+</html>

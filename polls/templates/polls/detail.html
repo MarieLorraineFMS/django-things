@@ -1,44 +1,66 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <title>Infos</title>
-    <meta name="description" content="Sondage : {{ question.question_text }}." />
-    <meta name="keywords"
-          content="sondage, vote, {{ question.question_text }}, avis" />
-
+    <title>Vote</title>
+    <meta
+      name="description"
+      content="Sondage : {{ question.question_text }}."
+    />
+    <meta
+      name="keywords"
+      content="sondage, vote, {{ question.question_text }}, avis"
+    />
   </head>
   <body>
     <h2>SONDAGE : {{ question.question_text }}</h2>
+
     <form action="{% url 'polls:vote' question.id %}" method="post">
-      {# --- Cross-Site Request Forgery --- #} {% comment %} Verif du token : si
-      absent || token différent retourne 403 {% endcomment %} {% csrf_token %}
+      {% csrf_token %}
       <fieldset>
         <legend>
           <h2>{{ question.question_text }}</h2>
         </legend>
 
         {% if error_message %}
-          <p>
-            <strong>{{ error_message }}</strong>
-          </p>
-        {% endif %}
-
-        {% for choice in question.choice_set.all %}
-          <input type="radio"
-                 name="choice"
-                 id="choice{{ forloop.counter }}"
-                 value="{{ choice.id }}" />
-          <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
-          <br />
+        <p style="color: red"><strong>{{ error_message }}</strong></p>
+        {% endif %} {% for choice in question.choice_set.all %}
+        <input
+          type="radio"
+          name="choice"
+          id="choice{{ forloop.counter }}"
+          value="{{ choice.id }}"
+        />
+        <label for="choice{{ forloop.counter }}"
+          >{{ choice.choice_text }}</label
+        >
+        <br />
         {% endfor %}
       </fieldset>
 
       <br />
-      <input type="submit" value="Valider le vote" />
+      <button
+        type="submit"
+        style="
+          background-color: #5196f5;
+          color: white;
+          padding: 10px 20px;
+          border: none;
+          cursor: pointer;
+          border-radius: 5px;
+        "
+      >
+        🚀 Valider le vote
+      </button>
     </form>
 
+    <p>
+      <a href="{% url 'polls:frequency' question.id %}"
+        >📊 Voir les résultats</a
+      >
+    </p>
+
     <hr />
-    <a href="{% url 'polls:index' %}">Retour à la liste</a>
+    <a href="{% url 'polls:index' %}">Tableau de bord</a>
   </body>
 </html>
