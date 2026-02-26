@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Créer une question</title>
+  </head>
+  <body>
+    <h2>NOUVEAU SONDAGE</h2>
+    {% if error_message %}
+    <p
+      id="error-msg"
+      style="
+        color: #d9534f;
+        font-weight: bold;
+        background: #f9f2f2;
+        padding: 10px;
+        border-radius: 5px;
+      "
+    >
+      ⚠️ {{ error_message }}
+    </p>
+    {% endif %}
+    <form
+      id="poll-form"
+      action="{% url 'polls:create_question' %}"
+      method="post"
+    >
+      {% csrf_token %}
+
+      <h3>Question</h3>
+      <input
+        type="text"
+        name="question_text"
+        class="poll-input"
+        placeholder="Nouvelle question..."
+        required
+        value="{{ question_text|default:'' }}"
+        style="width: 70%; padding: 10px"
+      />
+
+      <h3>Choix (2 minimum)</h3>
+      <p>
+        <input
+          type="text"
+          name="choice_1"
+          class="poll-input"
+          placeholder="Choix 1"
+          style="width: 50%; padding: 5px"
+          value="{{ choices_data.choice_1|default:'' }}"
+        />
+      </p>
+      <p>
+        <input
+          type="text"
+          name="choice_2"
+          class="poll-input"
+          placeholder="Choix 2"
+          style="width: 50%; padding: 5px"
+          value="{{ choices_data.choice_2|default:'' }}"
+        />
+      </p>
+      <p>
+        <input
+          type="text"
+          name="choice_3"
+          class="poll-input"
+          placeholder="Choix 3"
+          style="width: 50%; padding: 5px"
+          value="{{ choices_data.choice_3|default:'' }}"
+        />
+      </p>
+      <p>
+        <input
+          type="text"
+          name="choice_4"
+          class="poll-input"
+          placeholder="Choix 4"
+          style="width: 50%; padding: 5px"
+          value="{{ choices_data.choice_4|default:'' }}"
+        />
+      </p>
+      <p>
+        <input
+          type="text"
+          name="choice_5"
+          class="poll-input"
+          placeholder="Choix 5"
+          style="width: 50%; padding: 5px"
+          value="{{ choices_data.choice_5|default:'' }}"
+        />
+      </p>
+
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          width: 70%;
+          margin-top: 10px;
+        "
+      >
+        <button
+          type="submit"
+          style="
+            background-color: #5196f5;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+          "
+        >
+          🚀 Enregistrer
+        </button>
+        <a href="{% url 'polls:index' %}" style="text-decoration: none">
+          <button
+            type="button"
+            style="
+              background-color: #f44336;
+              color: white;
+              padding: 10px 20px;
+              border: none;
+              border-radius: 5px;
+              cursor: pointer;
+            "
+          >
+            ✖ Annuler
+          </button>
+        </a>
+      </div>
+    </form>
+
+    <hr />
+  </body>
+  <script>
+      const inputs = document.querySelectorAll(".poll-input");
+      const errorBox = document.getElementById("error-msg");
+
+      // Fonction pour tout effacer (le message ET le texte des cases)
+      const clearEverything = () => {
+          if (errorBox){
+          errorBox.style.display = "none";
+          inputs.forEach(input => input.value = "");
+          }
+      };
+
+      // 1. Si on tape, on cache juste l'erreur
+      inputs.forEach((input) => {
+        input.addEventListener("input", () => {
+          if (errorBox) errorBox.style.display = "none";
+        });
+      });
+
+    // Sécurité supplémentaire pour vider au chargement si on vient d'un lien direct
+      window.onload = () => {
+          {% if not error_message %}
+              inputs.forEach(input => input.value = "");
+          {% endif %}
+      };
+  </script>
+</html>

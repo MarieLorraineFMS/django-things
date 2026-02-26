@@ -20,6 +20,10 @@
     {% else %}
     <p>Aucun sondage. Revenez plus tard !</p>
     {% endif %}
-    <a href="{% url 'polls:question_add' %}">Ajouter une question</a>
+    <p>
+    <a href="{% url 'polls:create_question' %}" style="text-decoration: none;">
+        <button type="button">➕ Créer un nouveau sondage</button>
+    </a>
+</p>
   </body>
 </html>

@@ -6,6 +6,8 @@ from django.http import HttpRequest, HttpResponse
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.db.models import QuerySet, Sum, Avg
+from django.utils import timezone
+from django.views.decorators.cache import never_cache
 
 from polls.forms import QuestionForm
 
@@ -106,3 +108,37 @@ def question_create(request: HttpRequest)-> HttpResponse:
 
     return render(request, 'polls/question_form.html', {'form': form})
 
+# QUESTION
+@never_cache
+def create_question(request: HttpRequest) -> HttpResponse:
+    # Click "enregistrer"
+    if request.method == "POST":
+        question_text = request.POST.get("question_text")
+
+        # Recup choix
+        raw_choices = {
+            f"choice_{i}": request.POST.get(f"choice_{i}", "").strip()
+            for i in range(1, 6)
+        }
+
+        # Filtre !empty
+        valid_choices = [c for c in raw_choices.values() if c]
+
+        # 2 choix mini
+        if not question_text or len(valid_choices) < 2:
+            return render(request, "polls/create_question.html", {
+                "error_message": "Un sondage nécessite une question & au moins 2 choix !",
+                "question_text": question_text,
+                "choices_data": raw_choices,
+            })
+
+        # OK
+        new_q = Question(question_text=question_text, pub_date=timezone.now())
+        new_q.save()
+
+        for choice_text in valid_choices:
+            new_q.choice_set.create(choice_text=choice_text, votes=0)
+
+        return HttpResponseRedirect(reverse("polls:index"))
+
+    return render(request, "polls/create_question.html")
