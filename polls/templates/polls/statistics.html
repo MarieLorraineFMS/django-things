@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Statistiques</title>
+  </head>
+  <body>
+    <h1>STATISTIQUES</h1>
+
+    <p>Analyse :</p>
+
+    <ul>
+      <li>
+        <strong>Total de questions :</strong>
+        {{ total_questions }} question{{ total_questions|pluralize }}
+      </li>
+      <li>
+        <strong>Total de réponses possibles :</strong>
+        {{ total_choices }} choix au total
+      </li>
+    </ul>
+
+    <hr />
+    <a href="{% url 'polls:index' %}">Retour à l'accueil</a>
+  </body>
+</html>

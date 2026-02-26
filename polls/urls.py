@@ -16,4 +16,9 @@ urlpatterns = [
     # - views.index : la fonction à appeler pour cette route, définie dans views.py
     # - name="index" : un nom pour cette route, utilisé pour la référencer facilement dans le code (ex: {% url 'polls:index' %})
     path("", views.index, name="index"),
+    path("all/", views.all_polls, name="all_polls"),
+    path("<int:question_id>/", views.detail, name="detail"),
+    path("statistics/", views.statistics, name="statistics"),
+    path("<int:question_id>/results/", views.results, name="results"),
+    path("<int:question_id>/vote/", views.vote, name="vote"),
 ]

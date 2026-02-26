@@ -1,36 +1,38 @@
-"""
-Logique des vues.
-Chaque fonction reçoit une requête et prépare une réponse.
-"""
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
-from .models import Question
+from .models import Question, Choice
 
+# Accueil
 def index(request: HttpRequest) -> HttpResponse:
-    """
-    Vue de l'accueil des sondages.
-    Affiche la liste des dernières questions publiées.
-    """
-    # 1. On récupère les 5 dernières questions DESC
     latest_question_list = Question.objects.order_by("-pub_date")[:5]
-
-    # 2."context" est un dictionnaire de views.
-    context = {
-        "latest_question_list": latest_question_list,
-    }
-
-    # 3. 'render'.
-    # Requête + nom du fichier HTML + data/context.
+    context = {"latest_question_list": latest_question_list}
     return render(request, "polls/index.html", context)
 
+# DÉTAIL
 def detail(request: HttpRequest, question_id: int) -> HttpResponse:
-    """Affiche une question."""
-    return HttpResponse(f"Infos de la question n°{question_id}.")
+    """Affiche une question et ses choix (Exercice 3.1)."""
+    question = get_object_or_404(Question, pk=question_id)
+    return render(request, "polls/detail.html", {"question": question})
 
+# RÉSULTATS
 def results(request: HttpRequest, question_id: int) -> HttpResponse:
-    """Affiche les résultats d'une question."""
-    return HttpResponse(f"Résultats de la question n°{question_id}.")
+    return HttpResponse(f"Vous regardez les résultats de la question {question_id}.")
 
+# VOTE
 def vote(request: HttpRequest, question_id: int) -> HttpResponse:
-    """Gère le vote d'une question."""
-    return HttpResponse(f"Vous allez voter pour la question n°{question_id}.")
+    return HttpResponse(f"Vous votez pour la question {question_id}.")
+
+# TOUS LES SONDAGES
+def all_polls(request: HttpRequest) -> HttpResponse:
+    questions = Question.objects.all().order_by("id")
+    return render(request, "polls/all_polls.html", {"questions": questions})
+
+# STATS
+def statistics(request: HttpRequest) -> HttpResponse:
+    total_questions = Question.objects.count()
+    total_choices = Choice.objects.count()
+    context = {
+        "total_questions": total_questions,
+        "total_choices": total_choices,
+    }
+    return render(request, "polls/statistics.html", context)
