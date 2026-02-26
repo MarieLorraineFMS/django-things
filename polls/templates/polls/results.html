@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Résultats - {{ question.question_text }}</title>
+    <meta name="description"
+          content="Résultats pour le sondage : {{ question.question_text }}" />
+    <meta name="keywords"
+          content="sondage, résultats, {{ question.question_text }}, vote" />
+  </head>
+  <body>
+    <h1>RÉSULTATS</h1>
+
+    <h2>{{ question.question_text }}</h2>
+
+    <ul>
+      {% for choice in question.choice_set.all %}
+        <li>
+          {{ choice.choice_text }} —
+          <strong>{{ choice.votes }}</strong> vote{{ choice.votes|pluralize }}
+        </li>
+      {% endfor %}
+    </ul>
+
+    <hr />
+    {# On permet de revoter ou de repartir à zéro #}
+    <a href="{% url 'polls:detail' question.id %}">Voter à nouveau ?</a>
+    <br />
+    <a href="{% url 'polls:index' %}">Retour à l'accueil</a>
+  </body>
+</html>

@@ -20,5 +20,6 @@
     {% else %}
     <p>Aucun sondage. Revenez plus tard !</p>
     {% endif %}
+    <a href="{% url 'polls:question_add' %}">Ajouter une question</a>
   </body>
 </html>

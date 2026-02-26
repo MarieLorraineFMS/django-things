@@ -1,21 +1,44 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <title>Infos</title>
+    <meta name="description" content="Sondage : {{ question.question_text }}." />
+    <meta name="keywords"
+          content="sondage, vote, {{ question.question_text }}, avis" />
+
   </head>
   <body>
-    <h1>{{ question.question_text }}</h1>
-    <ul>
-      {% for choice in question.choice_set.all %}
-      <li>
-        {{ choice.choice_text }} — {{ choice.votes }}
-        vote{{choice.votes|pluralize }}
-      </li>
-      {% endfor %}
-    </ul>
+    <h2>SONDAGE : {{ question.question_text }}</h2>
+    <form action="{% url 'polls:vote' question.id %}" method="post">
+      {# --- Cross-Site Request Forgery --- #} {% comment %} Verif du token : si
+      absent || token différent retourne 403 {% endcomment %} {% csrf_token %}
+      <fieldset>
+        <legend>
+          <h2>{{ question.question_text }}</h2>
+        </legend>
+
+        {% if error_message %}
+          <p>
+            <strong>{{ error_message }}</strong>
+          </p>
+        {% endif %}
+
+        {% for choice in question.choice_set.all %}
+          <input type="radio"
+                 name="choice"
+                 id="choice{{ forloop.counter }}"
+                 value="{{ choice.id }}" />
+          <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
+          <br />
+        {% endfor %}
+      </fieldset>
+
+      <br />
+      <input type="submit" value="Valider le vote" />
+    </form>
 
     <hr />
-    <a href="{% url 'polls:index' %}">Retour à l'accueil</a>
+    <a href="{% url 'polls:index' %}">Retour à la liste</a>
   </body>
 </html>

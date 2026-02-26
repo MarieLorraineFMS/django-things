@@ -20,8 +20,9 @@
         <td>
           {% comment %} Génère l'URL vers la vue 'detail' pour une question
           suivant son ID 'polls:detail' : - 'polls' : app_name dans urls.py -
-          'detail' : name="" du path() - 'q.id' : param envoyé à la vue {%
-          endcomment %}
+          'detail' : name="" du path() - 'q.id' : param envoyé à la vue
+          {%endcomment %}
+
           <a href="{% url 'polls:detail' q.id %}">{{ q.question_text }}</a>
         </td>
         <td>{{ q.pub_date|date:"d/m/Y" }}</td>

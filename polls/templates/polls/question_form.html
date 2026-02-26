@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Créer une nouvelle question">
+    <title>Nouvelle Question</title>
+</head>
+<body>
+    <h1>Ajouter une question</h1>
+
+    <form method="post">
+        {% csrf_token %} {{ form.as_p }} <button type="submit">Enregistrer la question</button>
+    </form>
+
+    <hr>
+    <a href="{% url 'polls:index' %}">Annuler et retourner à l'accueil</a>
+</body>
+</html>
